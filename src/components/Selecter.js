@@ -35,7 +35,7 @@ import React, { useState } from 'react';
           maxHeight={300}
           labelField="label"
           valueField="value"
-          placeholder="Select item"
+          placeholder="Select Option"
           searchPlaceholder="Search..."
           value={selectedValue}
           onChange={item => onValueChange(item.value)}

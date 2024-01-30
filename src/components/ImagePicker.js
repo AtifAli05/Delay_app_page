@@ -1,6 +1,13 @@
 import React, { useState } from "react";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, View, Alert, Pressable, Text } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Alert,
+  Pressable,
+  Text,
+  ScrollView,
+} from "react-native";
 import * as ImagePicker from "expo-image-picker";
 
 import Button from "./Button";
@@ -39,62 +46,55 @@ export default function App() {
     });
 
     if (!result.canceled) {
-      setSelectedImage((prev)=>{
-        const state=[...prev]
-        state.push(result.assets[0])
-        return state
-      });
+      setSelectedImage((prev) => [
+        ...result.assets.map((item) => item.uri),
+      ]);
     } else {
       alert("You did not take any photo.");
     }
   };
 
   const removeImage = () => {
-    setSelectedImage(null);
+    setSelectedImage([]);
   };
   console.log(selectedImage, "[[[[[[[");
   return (
     <View style={styles.container}>
-      <View style={styles.imageContainer}>
-        {selectedImage.length>0&& selectedImage.map((i) => {
-          return (
-            <ImageViewer
-              placeholderImageSource={PlaceholderImage}
-              selectedImage={i}
-            />
-          );
-        })}
-      </View>
+      <ScrollView
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        style={styles.imageContainer}
+      >
+        {selectedImage.length > 0 &&
+          selectedImage.map((i) => {
+            return (
+              <ImageViewer
+                placeholderImageSource={PlaceholderImage}
+                selectedImage={i}
+              />
+            );
+          })}
+      </ScrollView>
 
       <View style={styles.footerContainer}>
-        <View
-          style={[
-            styles.buttonContainer,
-            { borderWidth: 4, borderColor: "#ffd33d", borderRadius: 18 },
-          ]}
-        >
+        <View style={styles.buttonContainer}>
           <Pressable
             style={[styles.button, { backgroundColor: "#fff" }]}
             onPress={pickImageAsync}
           >
             <Text style={[styles.buttonLabel, { color: "#25292e" }]}>
-              Choose a Photo
+              Choose Photo
             </Text>
           </Pressable>
         </View>
 
-        <View
-          style={[
-            styles.buttonContainer,
-            { borderWidth: 4, borderColor: "#ffd33d", borderRadius: 18 },
-          ]}
-        >
+        <View style={styles.buttonContainer}>
           <Pressable
             style={[styles.button, { backgroundColor: "#fff" }]}
             onPress={captureImageAsync}
           >
             <Text style={[styles.buttonLabel, { color: "#25292e" }]}>
-              Takes a Photo
+              Takes Photo
             </Text>
           </Pressable>
         </View>
@@ -102,7 +102,20 @@ export default function App() {
         {/* {selectedImage && (
           <Button theme="primary" label="Remove Photo" onPress={removeImage} />
         )} */}
+        {selectedImage.length > 0 && (
+          <View style={styles.buttonContainer}>
+            <Pressable
+              style={[styles.button, { backgroundColor: "#fff" }]}
+              onPress={removeImage}
+            >
+              <Text style={[styles.buttonLabel, { color: "#25292e" }]}>
+                Remove Photo
+              </Text>
+            </Pressable>
+          </View>
+        )}
       </View>
+
       <StatusBar style="auto" />
     </View>
   );
@@ -115,22 +128,27 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   imageContainer: {
-    paddingTop: 58,
+    paddingVertical: 4,
+    flexDirection: "row",
   },
   footerContainer: {
     alignItems: "center",
     flexDirection: "row",
   },
   buttonContainer: {
-    width: 150,
-    height: 50,
+    display:'flex',
+    width: 115,
+    height: 35,
     alignItems: "center",
-    justifyContent: "center",
-    padding: 3,
-    marginLeft: 8,
+    justifyContent: "space-between",
+    padding: 1,
+    borderColor: "#D3D3D3",
+    borderRadius: 10,
+    borderWidth: 1.4,
+    marginLeft:3
   },
   button: {
-    borderRadius: 10,
+    borderRadius: 5,
     width: "100%",
     height: "100%",
     alignItems: "center",
