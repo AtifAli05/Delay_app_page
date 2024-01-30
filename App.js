@@ -5,6 +5,7 @@ import SelectInput from "./src/components/Selecter";
 import GenericTextInput from "./src/components/TextInput";
 import TimeDropdown from "./src/components/TimpePicker";
 import Button from "./src/components/Buttons";
+import ImagePicker from "./src/components/ImagePicker";
 
 export default function App() {
   let obj = {
@@ -153,6 +154,8 @@ export default function App() {
         selectedValue={form.reason}
         onValueChange={(value) => handleFormChange("reason", value)}
       />
+      <ImagePicker />
+
       <Text>Comments</Text>
       <TextInput
         multiline={true}
@@ -169,10 +172,10 @@ export default function App() {
           marginVertical: 6,
         }}
       >
-        <View style={{marginRight:6}}>
+        <View style={{ marginRight: 6 }}>
           <Button title={"Save"} color={"#59E659"} onPress={onSave} />
         </View>
-       
+
         <View>
           <Button title={"Cancel"} color={"#FF474D"} />
         </View>
@@ -185,9 +188,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    marginTop:50,
+    marginTop: 50,
     marginHorizontal: 10,
-    marginBottom:10
+    marginBottom: 10,
   },
   comments: {
     height: 90,
