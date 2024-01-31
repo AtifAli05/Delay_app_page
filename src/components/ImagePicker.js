@@ -36,7 +36,7 @@ export default function App({ onPresspasspropsToParent }) {
         fileName: asset.fileName,
         uri:asset.uri
       }));
-      onPresspasspropsToParent([imagesInfo]);
+      onPresspasspropsToParent(imagesInfo);
     } else {
       alert("You did not select any image.");
     }
@@ -77,7 +77,7 @@ export default function App({ onPresspasspropsToParent }) {
         fileName: asset.fileName,
         uri: asset.uri,
       };
-      onPresspasspropsToParent([imageInfo]);
+      onPresspasspropsToParent(imageInfo);
     } else {
       alert("You did not take any photo.");
     }
