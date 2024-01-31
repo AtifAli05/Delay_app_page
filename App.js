@@ -21,12 +21,11 @@ export default function App() {
     delay: "",
     reason: "",
     comments: "",
-    image: "",
+    image: [],
   };
   const [selectedFruit, setSelectedFruit] = useState("");
   const [name, setName] = useState("");
   const [form, setForm] = useState(obj);
-
   const fruitOptions = [
     { label: "Apple", value: "apple" },
     { label: "Banana", value: "banana" },
@@ -80,10 +79,16 @@ export default function App() {
       [field]: value,
     }));
   };
+  const getImageInfo=(value)=>{
+    setForm((prevForm) => ({
+      ...prevForm,
+      image: value,
+    }));
+  }
   const onSave = () => {
     console.log("im clicked");
   };
-  console.log(form, "bvbv");
+  console.log(form.image, "bvbv");
   return (
     <ScrollView style={styles.container}>
       <GenericTextInput
@@ -154,7 +159,7 @@ export default function App() {
         selectedValue={form.reason}
         onValueChange={(value) => handleFormChange("reason", value)}
       />
-      <ImagePicker />
+      <ImagePicker onPresspasspropsToParent={getImageInfo}/>
 
       <Text>Comments</Text>
       <TextInput
