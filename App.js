@@ -6,6 +6,7 @@ import GenericTextInput from "./src/components/TextInput";
 import TimeDropdown from "./src/components/TimpePicker";
 import Button from "./src/components/Buttons";
 import ImagePicker from "./src/components/ImagePicker";
+import Header from "./src/components/Header";
 
 export default function App() {
   let obj = {
@@ -79,96 +80,137 @@ export default function App() {
       [field]: value,
     }));
   };
-  const getImageInfo=(value)=>{
+  const getImageInfo = (value) => {
     setForm((prevForm) => ({
       ...prevForm,
       image: value,
     }));
-  }
+  };
   const onSave = () => {
     console.log("im clicked");
   };
-  console.log(form.image, "bvbv");
+  console.log(form, "bvbv");
   return (
+    <>
+      <Header/>
+
     <ScrollView style={styles.container}>
-      <GenericTextInput
-        label="Driver Name"
-        value={form.driverName}
-        onChangeText={(text) => handleFormChange("driverName", text)}
-        placeholder="Enter your name"
-      />
-      <SelectInput
-        label="Truck"
-        options={truckOptions}
-        selectedValue={form.truck}
-        onValueChange={(value) => handleFormChange("truck", value)}
-      />
-      <TimeDropdown
-        placeholder={"start time "}
-        label="Delay start"
-        selectedValue={form.delayStart}
-        onValueChange={(value) => handleFormChange("delayStart", value)}
-      />
-      <TimeDropdown
-        placeholder={"End time  "}
-        label="Delay End"
-        selectedValue={form.delayEnd}
-        onValueChange={(value) => handleFormChange("delayEnd", value)}
-      />
-      <SelectInput
-        label="Issue"
-        options={issueOptions}
-        selectedValue={form.issue}
-        onValueChange={(value) => handleFormChange("issue", value)}
-      />
-      <SelectInput
-        label="PM"
-        options={pmOptions}
-        selectedValue={form.pm}
-        onValueChange={(value) => handleFormChange("pm", value)}
-      />
-      <SelectInput
-        label="Fault"
-        options={pmFalutOptions}
-        selectedValue={form.pmFault}
-        onValueChange={(value) => handleFormChange("pmFault", value)}
-      />
-      <SelectInput
-        label="Trailer"
-        options={fruitOptions}
-        selectedValue={selectedFruit}
-        onValueChange={setSelectedFruit}
-      />
+      <View style={styles.common}>
+        <View style={{ width: "25%",marginRight:18 }}>
+          <GenericTextInput
+            label="Driver Name"
+            value={form.driverName}
+            onChangeText={(text) => handleFormChange("driverName", text)}
+            placeholder="Enter your name"
+          />
+        </View>
+        <View style={{ width: "25%",marginRight:18  }}>
+          <SelectInput
+            label="Truck"
+            options={truckOptions}
+            selectedValue={form.truck}
+            onValueChange={(value) => handleFormChange("truck", value)}
+          />
+        </View>
+        <View style={{ width: "25%" ,marginRight:18 }}>
+          <TimeDropdown
+            placeholder={"start time "}
+            label="Delay start"
+            selectedValue={form.delayStart}
+            onValueChange={(value) => handleFormChange("delayStart", value)}
+          />
+        </View>
+        <View style={{ width: "25%" }}>
+          <TimeDropdown
+            placeholder={"End time  "}
+            label="Delay End"
+            selectedValue={form.delayEnd}
+            onValueChange={(value) => handleFormChange("delayEnd", value)}
+          />
+        </View>
+      </View>
 
-      <SelectInput
-        label="Fault"
-        options={trailerFault}
-        selectedValue={form.trailerFault}
-        onValueChange={(value) => handleFormChange("trailerFault", value)}
-      />
+      <View style={styles.common}>
+        <View style={{ width: "33%" ,marginRight:18  }}>
+          <SelectInput
+            label="Issue"
+            options={issueOptions}
+            selectedValue={form.issue}
+            onValueChange={(value) => handleFormChange("issue", value)}
+          />
+        </View>
+        <View style={{ width: "33%", marginRight:18   }}>
+          <SelectInput
+            label="PM"
+            options={pmOptions}
+            selectedValue={form.pm}
+            onValueChange={(value) => handleFormChange("pm", value)}
+          />
+        </View>
+        <View style={{ width: "34%" }}>
+          <SelectInput
+            label="Fault"
+            options={pmFalutOptions}
+            selectedValue={form.pmFault}
+            onValueChange={(value) => handleFormChange("pmFault", value)}
+          />
+        </View>
+      </View>
 
-      <SelectInput
-        label="Delay"
-        options={delayTypesOptions}
-        selectedValue={form.delay}
-        onValueChange={(value) => handleFormChange("delay", value)}
-      />
-      <SelectInput
-        label="Reason"
-        options={resonOptions}
-        selectedValue={form.reason}
-        onValueChange={(value) => handleFormChange("reason", value)}
-      />
-      <ImagePicker onPresspasspropsToParent={getImageInfo}/>
+      <View style={styles.common}>
+        <View style={{ width: "50%" ,marginRight:18  }}>
+          <SelectInput
+            label="Trailer"
+            options={fruitOptions}
+            selectedValue={selectedFruit}
+            onValueChange={setSelectedFruit}
+          />
+        </View>
+        <View style={{ width: "50%" }}>
+          <SelectInput
+            label="Fault"
+            options={trailerFault}
+            selectedValue={form.trailerFault}
+            onValueChange={(value) => handleFormChange("trailerFault", value)}
+          />
+        </View>
+      </View>
 
-      <Text>Comments</Text>
-      <TextInput
-        multiline={true}
-        numberOfLines={10}
-        style={styles.comments}
-        value={form.comments}
-        onChangeText={(text) => handleFormChange("comments", text)}
-      />
+      <View style={styles.common}>
+        <View style={{ width: "50%" ,marginRight:18  }}>
+          <SelectInput
+            label="Delay"
+            options={delayTypesOptions}
+            selectedValue={form.delay}
+            onValueChange={(value) => handleFormChange("delay", value)}
+          />
+        </View>
+        <View style={{ width: "50%" }}>
+          <SelectInput
+            label="Reason"
+            options={resonOptions}
+            selectedValue={form.reason}
+            onValueChange={(value) => handleFormChange("reason", value)}
+          />
+        </View>
+      </View>
+
+      <View style={styles.common}>
+        <View style={{ width: "50%",marginRight:18   }}>
+          <Text style={{ fontSize: 18, marginBottom: 5 }}>Comments</Text>
+          <TextInput
+            multiline={true}
+            numberOfLines={10}
+            style={styles.comments}
+            value={form.comments}
+            onChangeText={(text) => handleFormChange("comments", text)}
+          />
+        </View>
+        <View style={{ width: "50%" }}>
+          <ImagePicker onPresspasspropsToParent={getImageInfo} />
+        </View>
+      </View>
+
       <View
         style={{
           display: "flex",
@@ -185,23 +227,39 @@ export default function App() {
           <Button title={"Cancel"} color={"#FF474D"} />
         </View>
       </View>
-    </ScrollView>
+    </ScrollView></>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    marginTop: 50,
-    marginHorizontal: 10,
+    backgroundColor: "#ecedef80",
+    marginHorizontal: 5,
     marginBottom: 10,
+    padding: 10,
+    paddingTop: 20,
+  },
+  common: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    marginBottom: 20,
+    padding: 10,
   },
   comments: {
     height: 90,
     textAlignVertical: "top",
     borderWidth: 0.5,
-    fontSize: 15,
+    borderColor: '#ccc', // Added for clarity
     borderRadius: 10,
+    paddingHorizontal: 5,
+    fontSize: 17,
+    backgroundColor: "#fff",
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    marginTop: 10,
+    marginBottom: 6,
   },
 });

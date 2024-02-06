@@ -26,13 +26,16 @@ const GenericTextInput = ({
 const styles = StyleSheet.create({
   container: {
     marginBottom: 10,
+    width:'100%'
   },
   label: {
     marginBottom: 5,
+    fontSize:18,
+    paddingLeft:1
   },
   textInput: {
-      height: 43,
-      backgroundColor: 'white',
+      height: 50,
+      backgroundColor: '#fff',
       borderRadius: 12,
       padding: 12,
       shadowColor: '#000',
@@ -44,6 +47,7 @@ const styles = StyleSheet.create({
       shadowRadius: 1.41,
       borderRadius:10,
       elevation: 2,
+      fontSize:18
   },
 });
 

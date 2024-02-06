@@ -14,17 +14,19 @@ import * as FileSystem from "expo-file-system";
 import Button from "./Button";
 import ImageViewer from "./ImageViewer";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
+import SvgComponent from "../../assets/CameraSvg";
+
 const PlaceholderImage = require("../../assets/favicon.png");
 
 export default function App({ onPresspasspropsToParent }) {
   const [selectedImage, setSelectedImage] = useState([]);
-
+  const [name, setName] = useState();
   const pickImageAsync = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       quality: 1,
       allowsMultipleSelection: true,
     });
-// console.log(result.assets,"[[[[[[");
+    // console.log(result.assets,"[[[[[[");
     if (result.assets && result.assets.length > 0) {
       const base64Images = await Promise.all(
         result.assets.map((asset) => convertToBase64(asset.uri))
@@ -34,8 +36,9 @@ export default function App({ onPresspasspropsToParent }) {
         base64: base64Images[index],
         mimeType: asset.type,
         fileName: asset.fileName,
-        uri:asset.uri
+        uri: asset.uri,
       }));
+      setName(imagesInfo[0].fileName);
       onPresspasspropsToParent(imagesInfo);
     } else {
       alert("You did not select any image.");
@@ -77,6 +80,8 @@ export default function App({ onPresspasspropsToParent }) {
         fileName: asset.fileName,
         uri: asset.uri,
       };
+      setName(imageInfo.fileName);
+
       onPresspasspropsToParent(imageInfo);
     } else {
       alert("You did not take any photo.");
@@ -85,9 +90,12 @@ export default function App({ onPresspasspropsToParent }) {
 
   const removeImage = () => {
     setSelectedImage([]);
-    onPresspasspropsToParent([])
+    onPresspasspropsToParent([]);
   };
-//   console.log(selectedImage, "[[[[[[[");
+  function shortenName(name) {
+    return name.slice(0, 25);
+  }
+  console.log(name, "[[[[[[[");
   return (
     <View style={styles.container}>
       <ScrollView
@@ -107,42 +115,54 @@ export default function App({ onPresspasspropsToParent }) {
       </ScrollView>
 
       <View style={styles.footerContainer}>
-        <View style={styles.buttonContainer}>
-          <Pressable
-            style={[styles.button, { backgroundColor: "#fff" }]}
-            onPress={pickImageAsync}
-          >
-            <Text style={[styles.buttonLabel, { color: "#25292e" }]}>
-              Choose Photo
-            </Text>
-          </Pressable>
-        </View>
-
-        <View style={styles.buttonContainer}>
-          <Pressable
-            style={[styles.button, { backgroundColor: "#fff" }]}
-            onPress={captureImageAsync}
-          >
-            <Text style={[styles.buttonLabel, { color: "#25292e" }]}>
-              Takes Photo
-            </Text>
-          </Pressable>
-        </View>
-
         {/* {selectedImage && (
           <Button theme="primary" label="Remove Photo" onPress={removeImage} />
         )} */}
-        {selectedImage.length > 0 && (
-          <View style={styles.buttonContainer}>
+        {selectedImage.length > 0 ? (
+          <View style={styles.NamebuttonContainer}>
             <Pressable
               style={[styles.button, { backgroundColor: "#fff" }]}
               onPress={removeImage}
             >
               <Text style={[styles.buttonLabel, { color: "#25292e" }]}>
-                Remove Photo
+                {shortenName (name)}
               </Text>
             </Pressable>
           </View>
+        ) : (
+          <>
+            <View style={styles.buttonContainer}>
+              <Pressable
+                style={[styles.button, { backgroundColor: "#fff" }]}
+                onPress={pickImageAsync}
+              >
+                <Text style={[styles.buttonLabel, { color: "#25292e" }]}>
+                  Choose Photo
+                </Text>
+              </Pressable>
+            </View>
+            <View
+              style={[
+                styles.buttonContainer,
+                { backgroundColor: "#fff", marginLeft: 10, marginRight: 10 },
+              ]}
+            >
+              <Pressable
+                style={[styles.button, { backgroundColor: "#fff" }]}
+                onPress={captureImageAsync}
+              >
+                <SvgComponent />
+                <Text
+                  style={[
+                    styles.buttonLabel,
+                    { color: "#25292e", marginLeft: 4 },
+                  ]}
+                >
+                  Takes Photo
+                </Text>
+              </Pressable>
+            </View>
+          </>
         )}
       </View>
 
@@ -156,6 +176,9 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
     alignItems: "center",
+    borderRadius: 10,
+
+    height: 22,
   },
   imageContainer: {
     paddingVertical: 4,
@@ -167,8 +190,8 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     display: "flex",
-    width: 115,
-    height: 35,
+    width: 160,
+    height: 40,
     alignItems: "center",
     justifyContent: "space-between",
     padding: 1,
@@ -177,6 +200,16 @@ const styles = StyleSheet.create({
     borderWidth: 1.4,
     marginLeft: 3,
   },
+  NamebuttonContainer:{ display: "flex",
+  width: "90%",
+  height: 40,
+  alignItems: "center",
+  justifyContent: "space-between",
+  padding: 1,
+  borderColor: "#D3D3D3",
+  borderRadius: 10,
+  borderWidth: 1.4,
+  marginLeft: 3,},
   button: {
     borderRadius: 5,
     width: "100%",
@@ -187,7 +220,7 @@ const styles = StyleSheet.create({
   },
   buttonLabel: {
     color: "#fff",
-    fontSize: 16,
+    fontSize: 22,
   },
   buttonIcon: {
     paddingRight: 8,

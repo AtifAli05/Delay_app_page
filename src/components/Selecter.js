@@ -23,8 +23,8 @@ import React, { useState } from 'react';
     };
   
     return (
-      <View>
-        {label && <Text style={{ fontSize: 15 }}>{label}</Text>}
+      <View style={{width:'100%',marginRight:10}}>
+        {label && <Text style={{ fontSize: 18 }}>{label}</Text>}
         <Dropdown
           style={styles.dropdown}
           placeholderStyle={styles.placeholderStyle}
@@ -81,10 +81,10 @@ import React, { useState } from 'react';
       fontSize: 16,
     },
     placeholderStyle: {
-      fontSize: 16,
+      fontSize: 17,
     },
     selectedTextStyle: {
-      fontSize: 16,
+      fontSize: 18,
     },
     iconStyle: {
       width: 20,
