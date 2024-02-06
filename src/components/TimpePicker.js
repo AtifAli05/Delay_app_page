@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
       shadowOpacity: 0.2,
       shadowRadius: 1.41,
       borderRadius:10,
-      elevation: 2,
+      elevation: 10,
     },
     icon: {
       marginRight: 5,

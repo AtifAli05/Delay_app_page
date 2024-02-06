@@ -47,7 +47,8 @@ const styles = StyleSheet.create({
       shadowRadius: 1.41,
       borderRadius:10,
       elevation: 2,
-      fontSize:18
+      fontSize:18,
+      
   },
 });
 
