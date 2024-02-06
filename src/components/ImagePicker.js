@@ -15,6 +15,7 @@ import Button from "./Button";
 import ImageViewer from "./ImageViewer";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import SvgComponent from "../../assets/CameraSvg";
+import RemoveSvg from "../../assets/RemoveSvg";
 
 const PlaceholderImage = require("../../assets/favicon.png");
 
@@ -120,14 +121,15 @@ export default function App({ onPresspasspropsToParent }) {
         )} */}
         {selectedImage.length > 0 ? (
           <View style={styles.NamebuttonContainer}>
-            <Pressable
-              style={[styles.button, { backgroundColor: "#fff" }]}
-              onPress={removeImage}
-            >
+            <View style={[styles.button, { backgroundColor: "#fff" }]}>
               <Text style={[styles.buttonLabel, { color: "#25292e" }]}>
-                {shortenName (name)}
+                {shortenName(name)}
               </Text>
-            </Pressable>
+
+              <Pressable onPress={removeImage} style={{ marginLeft: 5 }}>
+                <RemoveSvg />
+              </Pressable>
+            </View>
           </View>
         ) : (
           <>
@@ -200,16 +202,18 @@ const styles = StyleSheet.create({
     borderWidth: 1.4,
     marginLeft: 3,
   },
-  NamebuttonContainer:{ display: "flex",
-  width: "90%",
-  height: 40,
-  alignItems: "center",
-  justifyContent: "space-between",
-  padding: 1,
-  borderColor: "#D3D3D3",
-  borderRadius: 10,
-  borderWidth: 1.4,
-  marginLeft: 3,},
+  NamebuttonContainer: {
+    display: "flex",
+    width: "90%",
+    height: 40,
+    alignItems: "center",
+    justifyContent: "space-between",
+    padding: 1,
+    borderColor: "#D3D3D3",
+    borderRadius: 10,
+    borderWidth: 1.4,
+    marginLeft: 3,
+  },
   button: {
     borderRadius: 5,
     width: "100%",
