@@ -1,10 +1,11 @@
 import { StyleSheet, Image,View } from "react-native";
+const PlaceholderImagee = require("../../assets/favicon.png");
 
 export default function ImageViewer({ placeholderImageSource, selectedImage }) {
   console.log(placeholderImageSource,"placeholderImageSource");
   const imageSource = selectedImage
     ? { uri: selectedImage }
-    :{ uri: placeholderImageSource};
+    :{ uri: PlaceholderImagee};
 
   return (
     <View style={{marginHorizontal:2}}>
@@ -20,3 +21,4 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
 });
+ 

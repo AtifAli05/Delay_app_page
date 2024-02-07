@@ -220,11 +220,11 @@ export default function App() {
         }}
       >
         <View style={{ marginRight: 6 }}>
-          <Button title={"Save"} color={"#59E659"} onPress={onSave} />
+          <Button title={"Save"} color={"#006400"} onPress={onSave} />
         </View>
 
         <View>
-          <Button title={"Cancel"} color={"#FF474D"} />
+          <Button title={"Cancel"} color={"#8B0000"} />
         </View>
       </View>
     </ScrollView></>

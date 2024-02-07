@@ -12,11 +12,11 @@ export default function Button(props) {
       paddingVertical: 9,
       paddingHorizontal: 32,
       borderRadius: 4,
-      elevation: 3,
+      elevation: 10,
       backgroundColor: props.color ?? "#007AFF",
     },
     text: {
-      fontSize: 16,
+      fontSize: 20,
       lineHeight: 21,
       fontWeight: "bold",
       letterSpacing: 0.25,
