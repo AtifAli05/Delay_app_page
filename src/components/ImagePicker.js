@@ -42,9 +42,7 @@ export default function App({ onPresspasspropsToParent }) {
       }));
       setName(imagesInfo[0].fileName);
       onPresspasspropsToParent(imagesInfo);
-    } else {
-      alert("You did not select any image.");
-    }
+    } 
   };
   const convertToBase64 = async (uri) => {
     try {
@@ -86,9 +84,7 @@ export default function App({ onPresspasspropsToParent }) {
       };
 
       onPresspasspropsToParent(imageInfo);
-    } else {
-      alert("You did not take any photo.");
-    }
+    } 
   };
 
   const removeImage = () => {

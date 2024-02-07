@@ -72,13 +72,13 @@ const styles = StyleSheet.create({
     },
     textItem: {
       flex: 1,
-      fontSize: 16,
+      fontSize: 18,
     },
     placeholderStyle: {
-      fontSize: 16,
+      fontSize: 18,
     },
     selectedTextStyle: {
-      fontSize: 16,
+      fontSize: 18,
     },
     iconStyle: {
       width: 20,
